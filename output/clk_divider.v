@@ -4,17 +4,16 @@ module clock_divider(
     input clk,
     output reg clk_25MH
     );
-	 
-reg [1:0] counter;
 
-always @(posedge clk)
-begin
-	if (counter == 4)begin 
-		clk_25MH <= ~clk_25MH;
-		counter <= 0;
-		end
-	else
-      counter <= counter + 1;
+reg [11:0] counter;
+
+always @(posedge clk) begin
+    if (counter == 1479) begin
+        counter <= 0;
+        clk_25MH <= ~clk_25MH;
+    end else begin
+        counter <= counter + 1;
+    end
 end
 
 endmodule
